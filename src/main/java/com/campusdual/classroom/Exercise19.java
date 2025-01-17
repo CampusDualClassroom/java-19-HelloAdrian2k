@@ -1,7 +1,5 @@
 package com.campusdual.classroom;
 
-import java.util.SplittableRandom;
-
 public class Exercise19 {
 
     private static String getTridimensionalString(int[][][] intArrayTri, int[][] flatMatrix) {
@@ -41,14 +39,11 @@ public class Exercise19 {
 
     public static int[][] flatTridimensionalArray(int[][][] intArrayTri) {
         int[][] flatTriArray = new int[intArrayTri[0].length][intArrayTri[0][0].length];
-        int sum = 0;
-        for (int d = 0; d < flatTriArray.length; d++) {
-            for (int k = 0; k < flatTriArray[d].length; k++) {
+        for (int i = 0; i < flatTriArray.length; i++) {
+            for (int k = 0; k < flatTriArray[i].length; k++) {
                 for (int j = 0; j < intArrayTri.length; j++) {
-                    sum += intArrayTri[j][d][k];
+                    flatTriArray[i][k] += intArrayTri[j][i][k];
                 }
-                flatTriArray[d][k] = sum;
-                sum = 0;
             }
         }
         return flatTriArray;
@@ -56,12 +51,9 @@ public class Exercise19 {
 
     public static String getBidimensionalString(int[][] intArrayBi) {
         StringBuilder builder = new StringBuilder();
-        int c = 1;
         for (int i = 0; i < intArrayBi.length; i++) {
-            for (int a = 0; a < intArrayBi[i].length; a++) {
-                builder.append((a < intArrayBi.length - 1) ? c++ + " " : (i < intArrayBi[i].length - 1) ?
-                        c++ + "\n" : c++);
-            }
+            builder.append(stringFlatMatrixRow(intArrayBi, i));
+            if (i < intArrayBi.length - 1) builder.append("\n");
         }
         return builder.toString();
     }
@@ -76,10 +68,8 @@ public class Exercise19 {
 
     public static int[] createAndPopulateUnidimensionalArray(int columns) {
         int[] arrayTemplate = new int[columns];
-        int cont = 1;
-        for (int c = 0; c < columns; c++) {
-            arrayTemplate[c] = cont;
-            cont++;
+        for (int i = 0; i < columns; i++) {
+            arrayTemplate[i] = i + 1;
         }
         return arrayTemplate;
     }
@@ -87,9 +77,9 @@ public class Exercise19 {
     public static int[][] createAndPopulateBidimensionalArray(int rows, int columns) {
         int[][] bidArrayTemplate = new int[rows][columns];
         int cont = 1;
-        for (int r = 0; r < rows; r++) {
+        for (int i = 0; i < rows; i++) {
             for (int c = 0; c < columns; c++) {
-                bidArrayTemplate[r][c] = cont;
+                bidArrayTemplate[i][c] = cont;
                 cont++;
             }
         }
@@ -99,10 +89,10 @@ public class Exercise19 {
     public static int[][][] createAndPopulateTridimensionalArray(int depth, int rows, int columns) {
         int[][][] tridArrayTemplate = new int[depth][rows][columns];
         int c = 1;
-        for (int j = 0; j < depth; j++) {
+        for (int i = 0; i < depth; i++) {
             for (int p = 0; p < rows; p++) {
                 for (int a = 0; a < columns; a++) {
-                    tridArrayTemplate[j][p][a] = c;
+                    tridArrayTemplate[i][p][a] = c;
                     c++;
                 }
             }
